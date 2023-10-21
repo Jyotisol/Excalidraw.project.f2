@@ -1,14 +1,17 @@
+
 @font-face {
   font-family: "Virgil";
   src: url("Virgil.woff2");
   font-display: swap;
 }
 :root {
+  --white: #ffffff;
   --hover: #7a7a7a;
   --icon_num: #b8b8b8;
   --grey-border: rgb(196, 196, 196);
   --theme: #6965db;
   --light-theme: #e3e2fe;
+  --dark-theme: #030064;
   --text-color: #7b7b7b;
 }
 * {
@@ -17,23 +20,34 @@
   box-sizing: border-box;
   font-family: sans-serif;
 }
-.root {
+#root {
   height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
+}
+/* canvas styling */
+.crosshair{
+  cursor: crosshair;
 }
 .top-menu {
+  position: absolute;
+  top: 1rem;
   display: flex;
   justify-content: space-between;
   gap: 1rem;
   height: 45px;
-  margin: 1rem;
+  width: 100vw;
+  padding-inline: 1rem;
+
 }
 .drawer-btn button {
   width: 36px;
   height: 36px;
-  background-color: transparent;
+  background-color:var(--white);
   border: 1px solid var(--grey-border);
   border-radius: 8px;
   cursor: pointer;
@@ -41,6 +55,7 @@
 .tool-div{
     box-shadow: 0px 0px 3px var(--grey-border);
     border-radius: 8px;
+    background-color:var(--white);
 }
 .tools-menu {
   height: 45px;
@@ -50,7 +65,7 @@
   gap: 5px;
   padding-inline: 5px;
   border-radius: 8px;
-  
+  z-index: 1;
 }
 .vertical-line {
   border-right: 1px solid var(--grey-border);
@@ -60,12 +75,15 @@
   width: 36px;
   height: 36px;
   font-size: 14px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
   cursor: pointer;
   position: relative;
+}
+.icon-div:hover{
+  background-color: var(--light-theme);
 }
 .icon-div span {
   font-size: 10px;
@@ -74,9 +92,17 @@
   bottom: 4px;
   right: 4px;
 }
-/* btn hover */
-.drawer-btn button:hover,
-.icon-div:hover,
+/* active on click */
+.active-btn{
+  background-color: var(--light-theme);
+  color: var(--dark-theme);
+
+  && span{
+    color: var(--dark-theme);
+  }
+}
+/* btn hover effect */
+.drawer-btn>button:hover,
 .library:hover,
 .decrease:hover,
 .increase:hover,
@@ -85,6 +111,7 @@
 .help:hover {
   background-color: rgb(240, 240, 240);
 }
+/* btn click effects */
 .drawer-btn button:active,
 .icon-div:active,
 .library:active,
@@ -93,7 +120,7 @@
 .undo:active,
 .redo:active,
 .help:active {
-  border: 1px solid;
+  border: 1px solid ;
 }
 .top-menu-right-div {
   display: flex;
@@ -116,6 +143,7 @@
 .library {
   height: 36px;
   font-size: 12px;
+  background-color:var(--white);
   border: 1px solid var(--grey-border);
   border-radius: 8px;
   display: flex;
@@ -134,9 +162,12 @@
 }
 
 /* foot css */
-.foot {
+#foot {
+  position: absolute;
   height: 45px;
-  margin: 1rem;
+  width: 100%;
+  padding-inline: 1rem;
+  bottom: 1rem;
   display: flex;
   justify-content: space-between;
 }
@@ -147,6 +178,7 @@
 .zoom-div {
   height: 36px;
   border: 1px solid var(--grey-border);
+  background-color:var(--white);
   border-radius: 8px;
   display: flex;
   justify-content: center;
@@ -174,9 +206,6 @@
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
 }
-.increase:hover {
-  background-color: rgb(240, 240, 240);
-}
 .percentage {
   padding-inline: 10px;
   color: var(--text-color);
@@ -185,6 +214,7 @@
 .undo-redo-div {
   height: 36px;
   font-size: 12px;
+  background-color:var(--white);
   border: 1px solid var(--grey-border);
   border-radius: 8px;
   display: flex;
@@ -212,7 +242,7 @@
   align-items: center;
   cursor: pointer;
 }
-.right {
+.foot-right {
   display: flex;
   gap: 1rem;
 }
@@ -231,6 +261,7 @@
   height: 36px;
   width: 36px;
   font-size: 13px;
+  background-color:var(--white);
   border: 1px solid var(--grey-border);
   border-radius: 8px;
   cursor: pointer;
